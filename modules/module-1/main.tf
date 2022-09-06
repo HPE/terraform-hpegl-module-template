@@ -10,12 +10,9 @@ terraform {
 }
 
 provider "hpegl" {
-  service{
-    id = var.new_nested_variable
-  }
 }
 
-resource "new_nested_resource" "name" {
-  name        = "name"
+resource "hpegl_metal_ssh_key" "name" {
+  name        = "sample key"
+  public_key  = "example_metal_ssh_key"
 }
-
