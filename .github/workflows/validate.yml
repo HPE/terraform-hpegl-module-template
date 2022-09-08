@@ -13,10 +13,12 @@ jobs:
       run: terraform fmt -check -recursive -diff
       continue-on-error: true
 
-    - name: Terraform Init
-      id: init
-      run: terraform init
+     # Init and validate root directory
+    - name: Terraform Init and Validate root directory
+      id: init_and_validate
+      run: terraform init && terraform validate -no-color
 
-    - name: Terraform Validate
-      id: validate
-      run: terraform validate -no-color
+      # Init and validate sub directories
+    - name: Terraform Init and Validate sub directories
+      id: sub_init_and_validate
+      run: tf_dirs="$(/usr/bin/find . -name "*.tf" | xargs -I{} dirname {} | uniq)"; for d in $tf_dirs; do pushd "$d" > /dev/null; echo $d; pwd; terraform init && terraform validate; popd > /dev/null; done
