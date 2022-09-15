@@ -1,4 +1,4 @@
-# Copyright 20222 Hewlett Packard Enterprise Development LP
+# Copyright 2022 Hewlett Packard Enterprise Development LP
 
 terraform {
   required_providers {
